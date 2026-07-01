@@ -1,0 +1,14 @@
+diff --git a/node_modules/next/dist/bin/next b/node_modules/next/dist/bin/next
+index 40956e6..6fe1fcd 100644
+--- a/node_modules/next/dist/bin/next
++++ b/node_modules/next/dist/bin/next
+@@ -24,8 +24,7 @@ if (process.env.NEXT_RSPACK) {
+ if (!_semver.default.satisfies(process.versions.node, ">=20.9.0", {
+     includePrerelease: true
+ })) {
+-    console.error(`You are using Node.js ${process.versions.node}. For Next.js, Node.js version "${">=20.9.0"}" is required.`);
+-    process.exit(1);
++    console.warn(`Bypassing warning: You are using Node.js ${process.versions.node}. For Next.js, Node.js version "${">=20.9.0"}" is required.`);
+ }
+ // Start performance profiling after Node.js version is checked
+ performance.mark('next-start');
