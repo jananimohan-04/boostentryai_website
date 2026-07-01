@@ -1,5 +1,5 @@
 diff --git a/node_modules/next/dist/bin/next b/node_modules/next/dist/bin/next
-index 40956e6..6fe1fcd 100644
+index 49ba293..fb98e96 100644
 --- a/node_modules/next/dist/bin/next
 +++ b/node_modules/next/dist/bin/next
 @@ -24,8 +24,7 @@ if (process.env.NEXT_RSPACK) {
@@ -10,5 +10,5 @@ index 40956e6..6fe1fcd 100644
 -    process.exit(1);
 +    console.warn(`Bypassing warning: You are using Node.js ${process.versions.node}. For Next.js, Node.js version "${">=20.9.0"}" is required.`);
  }
- // Start performance profiling after Node.js version is checked
- performance.mark('next-start');
+ process.env.NEXT_PRIVATE_START_TIME = Date.now().toString();
+ for (const dependency of [
