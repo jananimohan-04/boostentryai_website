@@ -1,0 +1,84 @@
+# ==========================================
+# Docker Commands for Work Booster AI
+# ==========================================
+
+# 1. Build the Docker Image
+docker build -t work-booster-ai:latest .
+
+# 2. Save Docker Image to TAR file (for transfer/backup)
+docker save -o work-booster-ai.tar work-booster-ai:latest
+
+# 3. Load Docker Image from TAR file (on target machine)
+docker load -i work-booster-ai.tar
+
+# 4. Run the Docker Container
+docker run -d -p 30017:30017 --name work-booster-ai-container work-booster-ai:latest
+
+# ==========================================
+# Additional Useful Commands
+# ==========================================
+
+# Stop the running container
+docker stop work-booster-ai-container
+
+# Start the stopped container
+docker start work-booster-ai-container
+
+# Remove the container
+docker rm work-booster-ai-container
+
+# Remove the image
+docker rmi work-booster-ai:latest
+
+# View running containers
+docker ps
+
+# View all containers (including stopped)
+docker ps -a
+
+# View container logs
+docker logs work-booster-ai-container
+
+# View container logs in real-time
+docker logs -f work-booster-ai-container
+
+# Execute bash inside the running container
+docker exec -it work-booster-ai-container sh
+
+# Restart the container
+docker restart work-booster-ai-container
+
+# View Docker images
+docker images
+
+# ==========================================
+# Complete Workflow (All in One)
+# ==========================================
+
+# Build, save to tar, and run
+docker build -t work-booster-ai:latest . && docker save -o work-booster-ai.tar work-booster-ai:latest && docker run -d -p 30017:30017 --name work-booster-ai-container work-booster-ai:latest
+
+# ==========================================
+# Transfer TAR to Another Server
+# ==========================================
+
+# On source machine (after building and saving):
+# Transfer the .tar file to target server using scp, ftp, or any file transfer method
+# Example using scp:
+# scp work-booster-ai.tar user@target-server:/path/to/destination/
+
+# On target machine:
+# 1. Load the image
+docker load -i work-booster-ai.tar
+
+# 2. Run the container
+docker run -d -p 30017:30017 --name work-booster-ai-container work-booster-ai:latest
+
+# ==========================================
+# Access the Application
+# ==========================================
+
+# After running the container, access the application at:
+# http://localhost:30017
+# or
+# http://your-server-ip:30017
