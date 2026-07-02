@@ -1,0 +1,38 @@
+diff --git a/node_modules/next/dist/bin/next b/node_modules/next/dist/bin/next
+index aa21c64..807a5f2 100644
+--- a/node_modules/next/dist/bin/next
++++ b/node_modules/next/dist/bin/next
+@@ -21,11 +21,15 @@ if (process.env.NEXT_RSPACK) {
+     // silent rspack's schema check
+     process.env.RSPACK_CONFIG_VALIDATE = 'loose-silent';
+ }
++if (!Array.prototype.toSorted) {
++    Array.prototype.toSorted = function(compareFn) {
++        return [...this].sort(compareFn);
++    };
++}
+ if (!_semver.default.satisfies(process.versions.node, ">=20.9.0", {
+     includePrerelease: true
+ })) {
+-    console.error(`You are using Node.js ${process.versions.node}. For Next.js, Node.js version "${">=20.9.0"}" is required.`);
+-    process.exit(1);
++    console.warn(`Bypassing warning: You are using Node.js ${process.versions.node}. For Next.js, Node.js version "${">=20.9.0"}" is required.`);
+ }
+ process.env.NEXT_PRIVATE_START_TIME = Date.now().toString();
+ for (const dependency of [
+diff --git a/node_modules/next/dist/server/require-hook.js b/node_modules/next/dist/server/require-hook.js
+index 5e0fee2..b281ca8 100644
+--- a/node_modules/next/dist/server/require-hook.js
++++ b/node_modules/next/dist/server/require-hook.js
+@@ -3,6 +3,11 @@
+ // Individually compiled modules are as defined for the compilation in bundles/webpack/packages/*.
+ // This module will only be loaded once per process.
+ "use strict";
++if (!Array.prototype.toSorted) {
++    Array.prototype.toSorted = function(compareFn) {
++        return [...this].sort(compareFn);
++    };
++}
+ Object.defineProperty(exports, "__esModule", {
+     value: true
+ });
